@@ -1,0 +1,21 @@
+.condition {
+    width: 10vw;
+    height: 5vh;
+    background-color: #fff;
+}
+
+@media (min-width: 50em) and (max-width: 60em) {
+    .condition {background-color: #333;}
+}
+
+
+.breakpoint {
+    color: aliceblue;
+    background-color: #444;
+}
+
+@media (min-width: 50em) and (min-height: 60em){
+    .breakpoint article {
+        column-count: 2;
+    }
+}
