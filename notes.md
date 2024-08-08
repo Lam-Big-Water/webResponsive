@@ -60,3 +60,44 @@ You can use the `@media` at-rule, or link
     /* Styles for viewports wider than 50em and narrower than 60em */
 }
 ```
+
+# Internationalization
+
+- Logical properties
+```css
+text-align
+margin-inline-start
+margin-inline-end
+```
+```html
+<!-- 
+  translated into a right-to-left language 
+  dir => direction
+  rtl => right to left
+-->
+<body dir="rtl">
+</body>
+```
+```css
+writing-mode
+```
+![Alt text](https://web.dev/static/learn/design/internationalization/image/latin-hebrew-japanese-a-538b56c52363b.webp)
+
+
+- Identify page language
+```html
+<!-- But unlike the lang attribute, which can go on any element, hreflang can only be applied to a and link elements. -->
+<html lang="en">
+
+<p>I felt some <span lang="de">schadenfreude</span>.</p>
+
+<a href="/path/to/german/version" hreflang="de">German version</a>
+
+<a href="/path/to/german/version" hreflang="de" lang="de">Deutsche Version</a>
+
+<link href="/path/to/german/version" rel="alternate" hreflang="de">
+```
+```css
+/* specifies how words should be hyphenated when text wraps across multiple lines. */
+hyphens: auto;
+```
