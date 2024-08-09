@@ -101,3 +101,14 @@ writing-mode
 /* specifies how words should be hyphenated when text wraps across multiple lines. */
 hyphens: auto;
 ```
+
+# Macro layouts
+```css
+/* automatically */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  grid-gap: 1em;
+}
+
+```
