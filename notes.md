@@ -102,7 +102,7 @@ writing-mode
 hyphens: auto;
 ```
 
-# Macro layouts
+# Macro layouts - page
 ```css
 /* automatically */
 .cards {
@@ -110,5 +110,67 @@ hyphens: auto;
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
   grid-gap: 1em;
 }
-
 ```
+
+# Micro layouts - component
+
+- grid
+```css
+h1 {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1em;
+}
+h1::before,
+h1::after {
+  content: "";
+  border-top: 0.1em double black;
+  align-self: center;
+}
+```
+
+- flex
+```css
+.media {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.media-illustration {
+  flex: 1;
+  max-inline-size: 200px;
+}
+.media-content {
+  flex: 3;
+}
+```
+
+- container queries
+```css
+main,
+aside {
+  container-type: inline-size;
+}
+
+.media-illustration {
+  max-width: 200px;
+  margin: auto;
+}
+
+@container (min-width: 25em) {
+  .media {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .media-illustration {
+    flex: 1;
+  }
+
+  .media-content {
+    flex: 3;
+  }
+}
+```
+![Alt text](https://web.dev/static/learn/design/micro-layouts/image/two-containers-different-5a460bfff7342.png)
