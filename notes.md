@@ -174,3 +174,85 @@ aside {
 }
 ```
 ![Alt text](https://web.dev/static/learn/design/micro-layouts/image/two-containers-different-5a460bfff7342.png)
+
+
+# Typography
+
+- If you don't specify any styles for your text, browsers will apply their own default styles - User Agent Stylesheets.
+
+- Scaling Text - That the text will get too small or too big
+```css
+html {
+  font-size: calc(0.75rem + 1.5vw);
+}
+```
+
+- Clamping text
+```css
+/* clamp() => it takes three value. The middle value is the same as what you pass to calc(). The opening value = minimum, the closing value = maximum */
+html {
+  font-size: clamp(1rem, 0.75rem + 1.5vw, 2rem);
+}
+```
+
+- Line length
+```css
+/* Using ch units for width will cause new lines to wrap at the 66th character at that font size */
+article {
+  max-inline-size: 66ch;
+}
+```
+
+- Line height
+```css
+/* Use unit-less values for your line-height declarations. This ensures that the line height is relative to the font-size*/
+article {
+  max-inline-size: 66ch;
+  line-height: 1.65;
+}
+blockquote {
+  max-inline-size: 45ch;
+  line-height: 2;
+}
+```
+
+- Web fonts
+```css
+/* Use @font-face to tell browsers where to find you your web font files - but every web font file you add could potentially degrade the user experience as it increases page load time. */
+@font-face {
+  font-family: Roboto;
+  src: url('/fonts/roboto-regular.woff2') format('woff2');
+}
+body {
+  font-family: Roboto, sans-serif;
+}
+
+```
+
+- Font loading
+```html
+/*
+You can request that browsers start downloading a font file as soon as possible. Add a link element to the head of your document that references your web font file. A rel attribute with a value of preload tells the browser to prioritize that file. An as attribute with a value of font tells the browser what kind of file this is. The type attribute allows you to be even more specific.
+
+You need to include the crossorigin attribute even if you are hosting the font files yourself.
+*/
+<link href="/fonts/roboto-regular.woff2" type="font/woff2" 
+  rel="preload" as="font" crossorigin>
+```
+
+```css
+/* Use a font-display value of swap if you still want the web font to replace the system font whenever the web font finally loads. */
+body {
+  font-family: Roboto, sans-serif;
+  font-display: swap;
+}
+
+
+/* Use a font-display value of fallback if you want to stick with the system font once text has been rendered. */
+body {
+  font-family: Roboto, sans-serif;
+  font-display: fallback;
+}
+```
+
+- Variable fonts - If you're using lots of different weights, a variable font could give you a big performance gain.
