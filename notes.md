@@ -256,3 +256,202 @@ body {
 ```
 
 - Variable fonts - If you're using lots of different weights, a variable font could give you a big performance gain.
+
+
+# Responsive images
+- Images, on the other hand, have an intrinsic size. If an image is wider than the screen, the image overflows and the user has to scroll horizontally to see all of it.
+
+- Constrain your images
+```css
+img {
+  /* to declare that images can never be rendered at a size wider than their containing element */
+
+  /* You can apply the same rule to other kinds of embedded content too, like videos and iframes. */
+  max-inline-size: 100%;
+
+  /* Adding a block-size value of auto means the browser preserves your images' aspect ratio as it resizes them. */
+  block-size: auto;
+
+  /* property to preserve your site's design - Unfortunately, this often means the browser has to squash or stretch the image to make it fit in the intended space.*/
+  aspect-ratio: 2 / 1;
+
+  /* To prevent squashing and stretching, use the object-fit property. */
+  /* tells the browser to preserve the image's aspect ratio, leaving empty space around the image if needed.*/
+  object-fit: contain;
+
+
+  /* tells the browser to preserve the image's aspect ratio, cropping the image if needed. */
+  object-fit: cover;
+
+  /* This adjusts the focus of the crop, so you can make sure the most important part of the image is still visible. */
+  object-position: top center;
+}
+```
+
+- Hints for sizing
+```html
+<!-- always include width and height attributes. This prevents your other content from jumping around when the image loads. -->
+<img
+ src="image.png"
+ alt="A description of the image."
+ width="300"
+ height="200"
+>
+```
+
+- Hints for loading
+```html
+<!--  For images below the fold, use a value of lazy. The browser won't load lazy images until the user has scrolled far down enough that the image is about to come into view. If the user never scrolls, the image never loads. -->
+<img
+ src="image.png"
+ alt="A description of the image."
+ width="300"
+ height="200"
+ loading="lazy"
+>
+
+<!-- the default value of eager to prevent images from being lazy loaded: -->
+<img
+ src="hero.jpg"
+ alt="A description of the image."
+ width="1200"
+ height="800"
+ loading="eager"
+>
+```
+
+- Fetch Priority
+```html
+<!-- tells the browser to fetch the image right away and at high priority, instead of waiting until the browser has finished its layout and would fetch images normally. -->
+<img
+ src="hero.jpg"
+ alt="A description of the image."
+ width="1200"
+ height="800"
+ loading="eager"
+ fetchpriority="high"
+>
+```
+
+- Hints for preloading
+```html
+<!-- However, some images may be unavailable, such as images added by JavaScript or a CSS background image. -->
+
+<!-- You can use preloading to get the browser to fetch these important images ahead of time. For really important images, you can combine this preloading with the fetchpriority attribute -->
+<link rel="preload" href="hero.jpg" as="image" fetchpriority="high">
+```
+<i style="color: red">Again, use these attributes sparingly to avoid overriding the browser's prioritization heuristics too often. Overusing them can cause performance degradation.
+</i>
+
+```html
+<!-- Some browsers support preloading responsive images based on srcset, using the imagesrcset and imagesizes attributes. For example: -->
+<link rel="preload" imagesrcset="hero_sm.jpg 1x hero_med.jpg 2x hero_lg.jpg 3x" as="image" fetchpriority="high">
+```
+
+- Image decoding
+```html
+<!-- There's also a decoding attribute you can add to img elements. You can tell the browser that the image can be decoded asynchronously, so it can prioritize processing other content. -->
+<img
+ src="image.png"
+ alt="A description of the image."
+ width="300"
+ height="200"
+ loading="lazy"
+ decoding="async"
+>
+<!-- You can use the sync value if the image itself is the most important piece of content to prioritize.
+ -->
+<img
+ src="hero.jpg"
+ alt="A description of the image."
+ width="1200"
+ height="800"
+ loading="eager"
+ decoding="sync"
+>
+
+```
+- Responsive images with 'srcset'
+
+- if a user has a small screen and a low-bandwidth network, making them download the same size images as users with larger screens wastes data. - To fix this issue, add multiple versions of the same image at different sizes, and use the srcset attribute to tell the browser these sizes exist and when to use them.
+
+```html
+<!-- To save bandwidth, the browser only downloads the larger image if they're needed. -->
+<img
+ src="small-image.png"
+ alt="A description of the image."
+ width="300"
+ height="200"
+ loading="lazy"
+ decoding="async"
+ srcset="small-image.png 300w,
+  medium-image.png 600w,
+  large-image.png 1200w"
+>
+<!-- If you're using the width descriptor, you must also use the sizes attribute to give the browser more information. This tells the browser what size you expect the image to be displayed at under different conditions. Those conditions are specified in a media query. -->
+<img
+ src="small-image.png"
+ alt="A description of the image."
+ width="300"
+ height="200"
+ loading="lazy"
+ decoding="async"
+ srcset="small-image.png 300w,
+  medium-image.png 600w,
+  large-image.png 1200w"
+ sizes="(min-width: 66em) 33vw,
+  (min-width: 44em) 50vw,
+  100vw"
+>
+```
+
+- Pixel density descriptor
+```html
+<!-- Use the density descriptor to describe the pixel density of the image in relation to the image in the src attribute. The density descriptor is a number followed by the letter x, as in 1x or 2x. -->
+<img
+ src="small-image.png"
+ alt="A description of the image."
+ width="300"
+ height="200"
+ loading="lazy"
+ decoding="async"
+ srcset="small-image.png 1x,
+  medium-image.png 2x,
+  large-image.png 3x"
+>
+```
+<i style="color: red">Note: You can use either width descriptors or density descriptors, but not both together.</i>
+
+
+- Presentational images
+```html
+<!-- Images in HTML are content. That's why you include the alt attribute with a description of the image for screen readers and search engines. -->
+<img
+ src="flourish.png"
+ alt=""
+ width="400"
+ height="50"
+>
+```
+
+- Background images
+```css
+element {
+  background-image: url(flourish.png);
+}
+
+/* The image-set function in CSS works a lot like the srcset attribute in HTML. Provide a list of images with a pixel density descriptor for each one. */
+element {
+  background-image: image-set(
+    small-image.png 1x,
+    medium-image.png 2x,
+    large-image.png 3x
+  );
+}
+```
+
+## Sum up
+- There are many factors to consider when you're adding images to your site, including:
+ 1. Reserving the right space for each image.
+ 2. Figuring out how many sizes you need.
+ 3. Deciding whether the image is content or decorative.
