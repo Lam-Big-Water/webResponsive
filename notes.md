@@ -455,3 +455,58 @@ element {
  1. Reserving the right space for each image.
  2. Figuring out how many sizes you need.
  3. Deciding whether the image is content or decorative.
+
+
+# The picture element
+```html
+<!-- In the same way that srcset builds upon the src attribute -->
+<!-- The difference is that where the srcset attribute gives suggestions to the browser, the picture element gives commands. This gives you control. -->
+<picture>
+  <img src="image.jpg" alt="A description of the image.">
+</picture>
+```
+
+- Image formats
+```html
+<!-- You can specify multiple source elements inside a picture element, each one with its own srcset attribute. The browser then executes the first one that it can. -->
+<picture>
+  <!-- type told the browser format -->
+  <!-- if the browser is capable of rendering -->
+  <source srcset="image.avif" type="image/avif">
+  <!-- if the browser is capable of rendering -->
+  <source srcset="image.webp" type="image/webp">
+  <!-- final choose - This means you can start using new image formats without sacrificing backward compatibility.-->
+  <img src="image.jpg" alt="A description of the image." 
+    width="300" height="200" loading="lazy" decoding="async">
+</picture>
+```
+
+- Image size
+```html
+<picture>
+  <source srcset="large.png" media="(min-width: 75em)">
+  <source srcset="medium.png" media="(min-width: 40em)">
+  <img src="small.png" alt="A description of the image." 
+    width="300" height="200" loading="lazy" decoding="async">
+</picture>
+```
+
+```html
+<!-- This is different to using the srcset and sizes attributes on the img element. In that case you're providing suggestions to the browser. The source element is more like a command than a suggestion. -->
+<picture>
+  <source srcset="large.png 1x" media="(min-width: 75em)">
+  <source srcset="medium.png 1x, large.png 2x" media="(min-width: 40em)">
+  <img src="small.png" alt="A description of the image." width="300" height="200" loading="lazy" decoding="async"
+    srcset="small.png 1x, medium.png 2x, large.png 3x">
+</picture>
+```
+
+- Cropping
+```html
+<!-- The different images might have different width and height ratios to suit their context better -->
+<picture>
+  <source srcset="full.jpg" media="(min-width: 75em)" width="1200" height="500">
+  <source srcset="regular.jpg" media="(min-width: 50em)" width="800" height="400">
+  <img src="cropped.jpg" alt="A description of the image." width="400" height="400" loading="eager" decoding="sync">
+</picture>
+```
