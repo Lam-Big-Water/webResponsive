@@ -510,3 +510,46 @@ element {
   <img src="cropped.jpg" alt="A description of the image." width="400" height="400" loading="eager" decoding="sync">
 </picture>
 ```
+
+# Icons
+- PNGs (and JPGs, WebP, and AVIF) are bitmap images. Bitmap images store information as pixels.
+
+- In an SVG, information is stored as drawing instructions. When the browser reads the SVG file the instructions are converted into pixels. Best of all, these instructions are relative. Regardless of the dimensions you use to describe lines and shapes, everything renders at just the right crispness.
+
+- XML
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="-21 -21 42 42" width="100" height="100">
+  <title>Smiling face</title>
+  <circle r="20" fill="yellow" stroke="black"/>
+  <ellipse rx="2.5" ry="4" cx="-6" cy="-7" fill="black"/>
+  <ellipse rx="2.5" ry="4" cx="6" cy="-7" fill="black"/>
+  <path stroke="black" d="M -12,5 A 13.5,13.5,0 0,0 12,5 A 13,13,0 0,1 -12,5"/>
+</svg>
+```
+
+```html
+<!-- If you put the SVG inside your HTML, use the aria-hidden attribute to hide it from assistive technology. -->
+<button class="menu">
+  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80" width="16" height="16">
+    <rect width="100" height="20" />
+    <rect y="30" width="100" height="20"/>
+    <rect y="60" width="100" height="20"/>
+  </svg>
+  Menu
+</button>
+```
+<i style="color: red">If you use the same icon multiple times in one page, it would be inefficient to repeat the entire SVG markup each time. There's an element in SVG called use which allows you to “clone” part of an SVG, even from a different SVG element.</i>
+
+```html
+<!-- Use the aria-label attribute to provide the accessible name -->
+<!-- If you put the SVG inside your HTML, use the aria-label attribute on the link or button to give it an accessible name and use the aria-hidden attribute on the icon. -->
+<button aria-label="Menu">
+  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80" width="16" height="16">
+    <rect width="100" height="20" />
+    <rect y="30" width="100" height="20"/>
+    <rect y="60" width="100" height="20"/>
+  </svg>
+</button>
+```
