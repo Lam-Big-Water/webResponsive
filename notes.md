@@ -553,3 +553,74 @@ element {
   </svg>
 </button>
 ```
+
+# Theming
+
+- Customize the browser interface
+```html
+<meta name="theme-color" content="#00D494">
+<!-- You can also specify a theme color in a web app manifest file. -->
+<link rel="manifest" href="/manifest.json">
+```
+
+- Provide a dark mode
+```css
+@media (prefers-color-scheme: dark) {
+  // Styles for a dark theme.
+}
+
+```
+```html
+<!-- You can also use the prefers-color-scheme media feature inside SVG -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+```
+
+- images
+```css
+/* If you are using SVGs in your HTML, you can apply custom properties there too. */
+svg {
+  stroke: var(--ink-color);
+  fill: var(--page-color);
+}
+```
+
+```css
+/* If you want to tone down the brightness of your photographic images when displayed in dark mode, you can apply a filter in CSS. */
+@media (prefers-color-scheme: dark) {
+  img {
+    filter: brightness(.8) contrast(1.2);
+  }
+}
+```
+```html
+/* For some images, you might want to swap them out completely in dark mode. */
+<picture>
+  <source srcset="darkimage.png" media="(prefers-color-scheme: dark)">
+  <img src="lightimage.png" alt="A description of the image.">
+</picture>
+```
+
+- Forms
+```css
+html {
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+/* So you support dark theme, but all the form inputs are still light themed. What can you do? */
+html { color-scheme: light dark; }
+```
+```html
+<!-- You can also use HTML. Add this in the head of your documents: -->
+<meta name="supported-color-schemes" content="light dark">
+```
+```css
+/* Use the accent-color property in CSS to style checkboxes, radio buttons, and some other form fields. */
+html {
+  accent-color: red;
+}
+```

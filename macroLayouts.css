@@ -1,3 +1,4 @@
+html { color-scheme: light dark; }
 .container {
 
     display: grid;
@@ -14,3 +15,9 @@
     border: 3px solid gainsboro;
     background-color: #fff;
 }
+
+/* @media (prefers-color-scheme: dark) {
+    html {
+      color-scheme: dark;
+    }
+  } */
