@@ -624,3 +624,52 @@ html {
   accent-color: red;
 }
 ```
+
+# Accessibility
+
+- color contrast
+
+- font size
+
+- Keyboard navigation
+```css
+a:focus,
+a:hover {
+  outline: 1px dotted;
+}
+a:focus-visible {
+  outline: 3px solid;
+}
+```
+- Headings
+```html
+<h1>Welcome to my page</h1>
+  <h2>About me</h2>
+    <h3>My childhood</h3>
+  <h2>About this website</h2>
+    <h3>How this site was built</h3>
+```
+
+- Structure
+```html
+<header>...</header>
+<nav>...</nav>
+<main>...</main>
+<aside>...</aside>
+<footer>...</footer>
+```
+
+- Forms
+```html
+<label for="name">Your name</label>
+<input id="name" type="text">
+```
+
+- Images
+```html
+<img src="dog.jpg" alt="A golden retriever sitting on the grass looking happy.">
+```
+<i style='color: orange'>Using sensible semantic HTML will make your web pages more accessible to assistive technologies like screen readers and also to other audio outputs like voice assistants.
+</i>
+
+- ARIA - ARIA stands for Accessible Rich Internet Applications. Its vocabulary allows you to provide semantic information when there isn't a suitable HTML element available.
