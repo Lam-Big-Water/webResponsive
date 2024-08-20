@@ -673,3 +673,114 @@ a:focus-visible {
 </i>
 
 - ARIA - ARIA stands for Accessible Rich Internet Applications. Its vocabulary allows you to provide semantic information when there isn't a suitable HTML element available.
+
+
+# Interaction
+- `pointer` value of `none` the user might be using a keyboard 
+
+- `pointer` value of `coarse` it means the primary input mechanism isn’t very accurate. A finger on a touchscreen is a coarse pointer.
+
+- `pointer` value of `fine` it means the primary input mechanism is capable of fine-grained control. A mouse or stylus is a fine pointer.
+
+```css
+/* In this example, buttons are made larger for coarse pointers: */
+button {
+  padding: 0.5em 1em;
+}
+@media (pointer: coarse) {
+  button {
+    padding: 1em 2em;
+  }
+}
+/*
+The any-pointer differs from the pointer media feature in that it reports if any pointing device passes the test.
+
+In this example, if the device has both a fine and a coarse input mechanism, the coarse styles are applied.
+ */
+@media (any-pointer: fine) {
+  button {
+    padding: 0.5em 1em;
+  }
+}
+@media (any-pointer: coarse) {
+  button {
+    padding: 1em 2em;
+  }
+}
+```
+
+- Hover
+```css
+/* In this example, some supplementary icon is available on hover but only if the primary input device is capable of hovering over an element. */
+button .extra {
+  visibility: visible;
+}
+@media (hover: hover) {
+  button .extra {
+    visibility: hidden;
+  }
+  button:hover .extra {
+    visibility: visible;
+  }
+}
+
+/* But anyone using a keyboard while a mouse is attached won’t get the benefit of the :hover styles. So it’s a good idea to combine :hover and :focus styles to cover both interactions. */
+button .extra {
+  visibility: visible;
+}
+@media (hover: hover) {
+  button .extra {
+    visibility: hidden;
+  }
+  button:is(:hover, :focus) .extra {
+    visibility: visible;
+  }
+}
+
+/* Just as any-pointer reports on any of the input mechanisms, any-hover will be true if any of the available input mechanisms are capable of hovering over elements. */
+button .extra {
+  visibility: hidden;
+}
+button:hover .extra,
+button:focus .extra {
+  visibility: visible;
+}
+@media (any-hover: none) {
+  button .extra {
+    visibility: visible;
+  }
+}
+```
+
+- Input types
+```html
+  <label for="email">Email</label>
+  <input type="email" id="email">
+  <label for="number">Number</label>
+  <input type="number" id="number">
+  <label for="tel">Tel</label>
+  <input type="tel" id="tel">
+  <label for="url">URL</label>
+  <input type="url" id="url">
+```
+
+- Input modes
+```html
+<!-- The inputmode attribute gives you fine-grained control over virtual keyboards. -->
+<label for="age">Age</label>
+<input type="number" id="age" inputmode="numeric">
+<label for="price">Price</label>
+<input type="number" id="price" inputmode="decimal">
+```
+
+- Autocomplete
+```html
+<!--  The autocomplete attribute provides you with a host of options for improving contact forms, log-in forms, and checkout forms.
+ -->
+<label for="name">Name</label>
+<input type="text" id="name" autocomplete="name">
+<label for="country">Country</label>
+<input type="text" id="country" autocomplete="country">
+<label for="email">Email</label>
+<input type="email" id="email" autocomplete="email">
+```
