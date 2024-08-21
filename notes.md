@@ -784,3 +784,68 @@ button:focus .extra {
 <label for="email">Email</label>
 <input type="email" id="email" autocomplete="email">
 ```
+
+# User interface patterns
+
+- Navigation
+1.  If you have a relatively small number of items, you can style the navigation to look good on small screens.
+![Alt text](https://web.dev/static/learn/design/ui-patterns/image/the-same-website-five-na-5068e5d65921e_1920.png)
+
+2. One possible solution is to keep links on one line but truncate the list at the edge of the screen. Users can swipe horizontally to reveal the links that aren't immediately visible. This is the overflow pattern.
+<img src='./pattern.png'>
+
+3. As a last resort you could choose to have your navigation hidden by default and provide a toggle mechanism for users to show and hide the contents. This is called progressive disclosure.
+![Alt text](https://web.dev/static/learn/design/ui-patterns/image/the-same-website-five-na-382970acfbe0f_1920.png)
+
+- Carousels
+```css
+/* For narrow screens, display items in a row using flexbox. The row of items will extend beyond the edge of the screen. Use overflow-x: auto to allow horizontal swiping. */
+
+/* The logical version of overflow-x is overflow-inline which would better match with the value for scroll-snap-type. This example uses the physical version for better cross-browser support. */
+
+/* The scroll-snap properties ensure that the items can be swiped in a way that feels smooth. Thanks to scroll-snap-type: inline mandatory, the items snap into place. */
+@media (max-width: 50em) {
+  .cards {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: inline mandatory;
+    scroll-behavior: smooth;
+  }
+  .cards .card {
+    flex-shrink: 0;
+    flex-basis: 15em;
+    scroll-snap-align: start;
+  }
+}
+```
+<img src='./pattern2.png'/>
+
+```css
+/* When the screen is large enough—wider than 50em in this case—switch over to grid and display the items in rows and columns, without hiding anything. */
+@media (min-width: 50em) {
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  }
+}
+```
+<i style='color: orange'>Again, the scroll-snap properties ensure that the interaction feels smooth. Also, notice that the images in the carousel have loading="lazy" applied to them. In this case, the images aren't below the fold, they're beyond the edge, but the same principle applies: if the user never swipes as far as that item, the image won't be downloaded, saving on bandwidth.</i>
+- more
+https://codepen.io/argyleink/pen/bGgyOGP
+
+- Data tables
+- You can apply the overflow pattern to tables. In this example, the table is wrapped in a div with a class of table-container.
+```css
+.table-container {
+  max-inline-size: 100%;
+  overflow-x: auto;
+  scroll-snap-type: inline mandatory;
+  scroll-behavior: smooth;
+}
+.table-container th, 
+.table-container td {
+  scroll-snap-align: start;
+  padding: var(--metric-box-spacing);
+}
+```
