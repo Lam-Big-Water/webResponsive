@@ -946,3 +946,47 @@ An update value of fast means the display refreshes fast enough to handle animat
   // Styles for side-by-side screens.
 }
 ```
+
+# inspect CSS grid
+
+- Gird badge
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/discover-grid-ae97f2f0f76fa_1920.png)
+
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/toggle-grid-badge-a7cb2d0d49a8c_1920.png)
+
+- Layout pane
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/layout-pane-7a3117d2d859_1920.png)
+
+- Grid editor
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/grid-editor-button-10abfa128eed1_1920.png)
+
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/setting-css-properties-83a3592180319_1920.png)
+
+1. Show line numbers
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/show-line-numbers-1403d87445c36_1920.png)
+
+2. Hide line labels
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/hide-line-labels-962f521eacda4_1920.png)
+
+3. Show line names
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/show-line-names-cd2a82d32cd69_1920.png)
+
+4. Show track sizes
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/show-track-sizes-dff7ef9244377_1920.png)
+
+5. Show area names
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/show-area-names-a1200916ac968_1920.png)
+
+6. Extend grid lines
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/extend-grid-lines-1713b5131e96a_1920.png)
+
+- Grid overlays
+
+1. Enable overlay views of multiple grids
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/enable-overlay-views-mul-8373f77b6a513_1920.png)
+
+2. Customize the grid overlay color
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/customize-grid-overlay-c-20683fc6bbf7e_1920.png)
+
+3. Highlight the grid
+![Alt text](https://developer.chrome.com/static/docs/devtools/css/grid/image/highlight-grid-2b2603b693356_1920.png)
