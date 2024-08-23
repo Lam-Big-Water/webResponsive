@@ -849,3 +849,100 @@ https://codepen.io/argyleink/pen/bGgyOGP
   padding: var(--metric-box-spacing);
 }
 ```
+
+# Media features
+```css
+main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+@media (max-width: 45em) {
+  main {
+    display: block;
+  }
+}
+@media (min-width: 45em) {
+  main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+}
+/* For example, you might have a header element that you want to anchor to the top of the browser window if there's enough vertical space. */
+@media (min-height: 30em) {
+  header {
+    position: fixed;
+  }
+}
+/* But you can use the max-height media feature if you prefer. Here, the header is anchored by default, but the stickiness is removed if there isn't enough vertical space. */
+header {
+  position: fixed;
+}
+@media (max-height: 30em) {
+  header {
+    position: static;
+  }
+}
+```
+
+```css
+/*  The aspect-ratio media feature offers the same choice. It also offers an unprefixed version if you want to apply styles at an exact ratio of width to height. */
+@media (min-aspect-ratio: 16/9) {
+  // The ratio of width to height is at least 16 by 9.
+}
+@media (max-aspect-ratio: 16/9) {
+  // The ratio of width to height is less than 16 by 9.
+}
+@media (aspect-ratio: 16/9) {
+  // The ratio of width to height is exactly 16 by 9.
+}
+
+/*  the orientation media feature might better suit your needs. It has two possible values: portrait or landscape. */
+@media (orientation: portrait) {
+  // The width is less than the height.
+}
+@media (orientation: landscape) {
+  // The width is greater than the height.
+}
+```
+
+- Displays
+```css
+/* define your animations and transitions */
+/* 
+An update value of none means there's no refresh rate. A printed page, for example, can't be updated.
+
+An update value of slow means the display can't refresh quickly. An e-ink display is one example of a screen with a slow refresh rate.
+
+An update value of fast means the display refreshes fast enough to handle animations and transitions.
+*/
+@media (update: fast) {
+  a {
+    transition-duration: 0.4s;
+    transition-property: transform;
+  }
+  a:hover {
+    transform: scale(150%);
+  }
+}
+```
+
+- color 
+```css
+/* dynamic-range value of high is given a different color space using the new CSS color() function. */
+.neon-red {
+  color: hsl(355 100% 95%);
+}
+@media (dynamic-range: high) {
+  .neon-red {
+    color: color(display-p3 1 0 0);
+  }
+}
+```
+
+# Screen configurations
+```css
+/* There's an experimental media feature designed to detect if your website is being displayed on a dual-screen device. The proposed name of the media feature is viewport-segments. There are two varieties: horizontal-viewport-segments and vertical-viewport-segments. */
+@media (horizontal-viewport-segments: 2) and (vertical-viewport-segments: 1) {
+  // Styles for side-by-side screens.
+}
+```
