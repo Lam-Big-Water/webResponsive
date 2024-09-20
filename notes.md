@@ -1,9 +1,5 @@
-- center on the screen 
-```css
-margin: 0 auto;
-```
-# Introduction
-- A meta element for viewport
+
+# A meta element for viewport
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1">
 explain(
